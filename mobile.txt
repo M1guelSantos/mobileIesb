@@ -1,0 +1,4 @@
+npx expo install react-native-web@~0.19.6 react-dom@18.2.0
+
+DE SEGUNDO NO INICIAL
+git remote add origin https://github.com/M1guelSantos/mobileIesb.git
