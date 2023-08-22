@@ -1,31 +1,55 @@
-import { ScrollView,  StyleSheet, Text, View } from 'react-native';
+import { Button, ScrollView,  StyleSheet, Text, View } from 'react-native';
 import Card from './components/Card';
+import Botoes from './components/Botoes';
 
 export default function App() {
   return (
    <> 
-    <ScrollView style={{marginTop: 20}}>
+    <ScrollView style={{marginTop: 10}}>
 
-    <Card>
-    <View style={styles.card}>
-      <Text style={styles.titulo}>Hello world!!</Text>
-      <Text>Isto e um paragrafo</Text>
-      <Text>Isto e um paragrafo</Text>
-      <Text>Isto e um paragrafo</Text>
-    </View>
+    <Card titulo = "MIGUEL MALUCO 1"> </Card>
+    <Text>Teste1</Text>
+    <Text>Teste2</Text>
+    <Text>Teste3</Text>
+    <Botoes/>
 
-    <View style={styles.card}>
-      <Text style={styles.titulo}>MIGUELDOIDAO</Text>
-      <Text>Isto e um paragrafo</Text>
-    </View>
-
-    <View style={styles.card}>
-      <Text style={styles.titulo}>MIGUELDOIDAO</Text>
-      <Text>Isto e um paragrafo</Text>
-      <Text>Isto e um paragrafo</Text>
-      <Text>Isto e um paragrafo</Text>
-    </View>
+    <Card titulo = "MIGUEL MALUCO 2">
+      <Text>Filho 1</Text>
     </Card>
+    
+    <Card titulo = "MIGUEL MALUCO 3"> 
+      <Text>Filho1</Text>
+    </Card>
+
     </ScrollView>
-    </>
+    </>   
 )};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  card: {
+    borderColor: 'blue',
+    borderWidth: 2,
+    borderRadius : 1,
+    borderStyle: 'solid',
+    marginBottom: 20
+  },
+  titulo:{
+    color:'white',
+    fontSize: 25,
+    padding: 20,
+    borderBottomWidth: 2,
+    borderBottomCollor: 'red',
+    borderBottomStyle: 'solid',
+    textAlign: 'center', 
+    backgroundColor: '#ccc'
+    },
+  });
+
+
+

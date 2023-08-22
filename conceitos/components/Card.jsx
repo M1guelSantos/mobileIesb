@@ -3,14 +3,15 @@ import { StyleSheet } from 'react-native'
 import { View } from 'react-native'
 import { Text } from 'react-native'
 
-const Card = () => {
+const Card = (props) => {
+
+
+
     return (
         <>
             <View style={styles.card}>
-                <Text style={styles.titulo}>MIGUELDOIDAO</Text>
-                <Text>Isto e um paragrafo</Text>
-                <Text>Isto e um paragrafo</Text>
-                <Text>Isto e um paragrafo</Text>
+                <Text style={styles.titulo}>{props.titulo}</Text>
+                {props.children}
             </View>
         </>
     )
@@ -26,11 +27,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     card: {
-      borderColor: 'blue',
-      borderWidth: 2,
-      borderRadius : 1,
+      borderColor: 'black',
+      borderWidth: 3,
       borderStyle: 'solid',
-      marginBottom: 20
+      marginBottom: 20,
     },
     titulo:{
       color:'white',
