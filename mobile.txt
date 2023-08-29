@@ -8,3 +8,13 @@ git remote add origin https://github.com/M1guelSantos/mobileIesb.git
 HTML dentro do js -> jsx 
 
 |react native paper -> npm install react-native-paper
+
+o .Map possui a seguinte estrutura 
+                {id.map(nome => (
+                <Card style={{ marginBottom: 15 }}>
+                    <Card.Title title={nome.name} subtitle={nome.descricao} left={LeftContent}/>
+                </Card>
+                 ))}
+
+                
+Concatenando no Js array -> {carro.marca} - {carro.ano}

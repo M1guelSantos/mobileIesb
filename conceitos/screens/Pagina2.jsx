@@ -3,24 +3,26 @@ import { Avatar, Button, Card, Text } from 'react-native-paper'
 
 const Pagina2 = () => {
 
-  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+    const LeftContent = props => <Avatar.Icon {...props} icon="account" />
 
-  return (
-    <>
-      <Card >
-          <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-        <Card.Content>
-          <Text variant="titleLarge">Card title</Text>
-          <Text variant="bodyMedium">Card content</Text>
-        </Card.Content>
-        <Card.Actions>
-          <Button>Cancel</Button>
-          <Button>Ok</Button>
-        </Card.Actions>
-      </Card>
-      
-      </>
-  )
+    const id = [
+        {id: 1, name: 'Miguel', descricao: 'Aluno'},
+        {id: 2, name: 'Joao', descricao: 'Aluno'},
+        {id: 3, name: 'Orion Teles', descricao: 'Professor'},
+        {id: 4, name: 'Vaz', descricao: 'Aluno'},
+        {id: 5, name: 'Fernado', descricao: 'Teste'},
+        {id: 6, name: 'Pedro', descricao: 'Teste'}
+    ]
+    
+    return (
+        <>
+            {id.map(nome => (
+                <Card style={{ marginBottom: 15 }}>
+                    <Card.Title title={nome.name} subtitle={nome.descricao} left={LeftContent}/>
+                </Card>
+            ))}
+        </>
+    )
 }
 
 export default Pagina2
