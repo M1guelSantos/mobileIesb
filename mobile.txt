@@ -3,11 +3,19 @@ npx expo install react-native-web@~0.19.6 react-dom@18.2.0
 DE SEGUNDO NO INICIAL -> PARA COMMIT
 git remote add origin https://github.com/M1guelSantos/mobileIesb.git
 
-*LEMBRAR DO BUNDLER:metro no json*
+*LEMBRAR DO BUNDLER:metro no app.json*
 
 HTML dentro do js -> jsx 
 
 |react native paper -> npm install react-native-paper
+
+
+
+NAVIGATION:
+npx expo install react-native-screens react-native-safe-area-context
+-------------------------------------------------------------------
+npm i axios
+
 
 o .Map possui a seguinte estrutura 
                 {id.map(nome => (
@@ -18,3 +26,20 @@ o .Map possui a seguinte estrutura
 
                 
 Concatenando no Js array -> {carro.marca} - {carro.ano}
+---------------------------------------------------------------------
+Secure: "https://image.tmdb.org/t/p/w500"
+
+baseURL: https://api.themoviedb.org/3/
+---------------------------------------------------------------------
+Utilização API 
+
+import axios from "axios";
+
+const apiFilmes = axios.create({
+    baseURL:'',
+    headers:{
+        Authorization:'Bearer'
+    }
+})
+----------------------------------------------------------------------------|
+Exibindo chamada API barra de pesquisa browser : https://api.themoviedb.org/3/movie/popular?api_key=3e7a8f80f3de0521383e078234f63a5a

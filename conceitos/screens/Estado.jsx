@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { TextInputBase, View } from 'react-native'
 import { Button, Text } from 'react-native-paper'
 import styles from '../styles/styles'
 
@@ -7,7 +7,6 @@ import styles from '../styles/styles'
 const Estado = () => {
 
     const[qtd, setQtd] = useState(0)
-
 
     return (
         <>
@@ -18,6 +17,7 @@ const Estado = () => {
             <Text style={styles.espacamento}>{qtd}</Text>
 
             <Button  mode='contained' onPress={()=>setQtd(qtd+1)}>+</Button>
+
         </View>
         </>
     )

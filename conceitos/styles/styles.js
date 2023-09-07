@@ -12,7 +12,7 @@ const styles = StyleSheet.create ({
     espacamento: {
         padding: 20,
         fontSize: 30,
-    }
+    },
 })
 
 export default styles

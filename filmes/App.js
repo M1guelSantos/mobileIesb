@@ -1,21 +1,20 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import {  Text, View } from 'react-native';
-import {NavigationContainer, PaperProvider} from 'react-native-paper';
-import PopularMovies from './screens/filmes/PopularMovies';
-
+import { StyleSheet, Text, View } from 'react-native';
+import FilmesPopulares from './screens/filmes/FilmesPopulares';
+import { PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <>
-      <PaperProvider>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <PaperProvider> 
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='Profile' component={PopularMovies} options={{title:'Titulo'}}></Stack.Screen>
+          <Stack.Screen name='filmes-populares' component={FilmesPopulares} options={{title: "Filmes populares"}} />
         </Stack.Navigator>
       </NavigationContainer>
       </PaperProvider>
