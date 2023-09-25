@@ -6,7 +6,6 @@ import apiFilmes from '../../services/apiFilmes'
 const Atores = ({ navigation, route }) => {
   const [ator, setAtor] = useState({})
   const [Filmes, setFilmes] = useState([])
-  const [string, setString] = useState('')
   useEffect(() => {
     apiFilmes.get(`/person/${route.params.id}`).then(resultado => {
       setAtor(resultado.data)
