@@ -17,12 +17,12 @@ const FilmesPopulares = ({ navigation }) => {
     <>
       <View>
         {FilmesPopulares.map(item => (
-          <Card
+          <Card 
             key={item.id}
             onPress={() => navigation.push('filmes-detalhes', {id: item.id})}
             style={{ margin: 10 }}
           >
-            <Card.Cover style={{ padding: 10 }} source={{ uri: "https://image.tmdb.org/t/p/w500/" + item.backdrop_path }} />
+            <Card.Cover source={{ uri: "https://image.tmdb.org/t/p/w500/" + item.backdrop_path }} />
             <Card.Content>
               <Text variant="titleLarge" style={{
                 marginBottom: 5,

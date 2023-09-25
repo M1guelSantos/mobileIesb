@@ -6,6 +6,7 @@ import FilmesDetalhes from './screens/filmes/FilmesDetalhes';
 import Atores from './screens/atores/Atores';
 
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

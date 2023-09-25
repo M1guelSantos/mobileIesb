@@ -26,7 +26,7 @@ const FilmesDetalhes = ({ navigation, route }) => {  //Recuperando os parametros
         <Card
           style={{ margin: 10 }}
         >
-          <Card.Cover style={{ padding: 10 }} source={{ uri: "https://image.tmdb.org/t/p/w500/" + filme.backdrop_path }} />
+          <Card.Cover source={{ uri: "https://image.tmdb.org/t/p/w500/" + filme.backdrop_path }} />
           <Card.Content>
             <Text variant="titleLarge" style={{
               marginBottom: 5,
@@ -41,29 +41,34 @@ const FilmesDetalhes = ({ navigation, route }) => {  //Recuperando os parametros
           style={{ margin: 10 }}
         >
           <Card.Content>
-            <Text variant="titleLarge" style={{
-              marginBottom: 5,
-              fontSize: 13
-            }} >Data de Lançamento: {filme.release_date}
-            </Text>
-            <Text variant="bodyMedium" style={{ fontSize: 13 }} > Média de votos: {filme.vote_average}</Text>
             <Text variant="bodyMedium" style={{ fontSize: 13 }} > Orçamento: {filme.budget}</Text>
+            <Text variant="bodyMedium" style={{ fontSize: 13 }} > Voto: {filme.vote_average}</Text>
+            <Text variant="bodyMedium" style={{ fontSize: 13 }} > Média de votos: {filme.runtime} min</Text>
+            <Text variant="bodyMedium" style={{ fontSize: 13 }} > Lançamento: {filme.release_date}</Text>
           </Card.Content>
         </Card>
+        <Text style={{
+          color: 'red',
+          fontWeight: 'bold',
+          fontSize: 18,
+          textAlign: 'center'
+        }}>Filmes:</Text>
 
-          
         {atores.map(item => (
-           <Card mode="outlined" style={{margin: 5,
-           borderRadius: 10,}}> 
-          <Card.Title style={{margin: 7
-          }}
-            title={item.name}
-            subtitle={item.character}
-            left={(props) => <Avatar.Image size={45} source={{ uri: "https://image.tmdb.org/t/p/w500/" + item.profile_path }} />}
-            right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.push('atores-detalhes', {id: item.id})}/>}
-          />
+          <Card mode="outlined" style={{
+            margin: 8,
+            borderRadius: 10,
+          }}>
+            <Card.Title style={{
+              margin: 10
+            }}
+              title={item.name}
+              subtitle={item.character}
+              left={(props) => <Avatar.Image size={45} source={{ uri: "https://image.tmdb.org/t/p/w500/" + item.profile_path }} />}
+              right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => navigation.push('atores-detalhes', { id: item.id })} />}
+            />
           </Card>
-        ))}    
+        ))}
       </View>
     </>
   )
