@@ -1,6 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Teste from './screens/Teste';
+import Personagens from './screens/Personagens';
+import PersonsDetalhes from './screens/PersonsDetalhes';
+
 
 
 
@@ -10,7 +12,8 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Teste" component={Teste} options={{ title: "Teste" }} />
+          <Stack.Screen name="Personagens" component={Personagens} options={{ title: "Personagens" }} />
+          <Stack.Screen name="Personagens-detalhes" component={PersonsDetalhes} options={{ title: "Personagens-detalhes" }} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
