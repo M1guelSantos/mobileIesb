@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-const Professores = () => {
+const Professores = ({navigation}) => {
   return (
     <Text>Professores</Text>
   )
