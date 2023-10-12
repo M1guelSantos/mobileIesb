@@ -1,9 +1,9 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Button } from 'react-native-paper'
 
 const Professores = ({navigation}) => {
   return (
-    <Text>Professores</Text>
+    <Button style={{marginTop: 10, margin: 10}} mode='contained' onPress={()=>navigation.push('Form professores')}>Ir para formulário</Button>
   )
 }
 
