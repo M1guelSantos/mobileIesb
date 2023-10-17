@@ -1,31 +1,44 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Text, TextInput } from 'react-native-paper'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { ScrollView } from 'react-native';
+import { Button, Card, FAB, IconButton, Text } from 'react-native-paper'
 
 const Cursos = ({ navigation }) => {
   const [cursos, setCursos] = useState([])
 
-  useEffect(() => {
-    AsyncStorage.getItem('cursos').then(resultado => {
-      setCursos(JSON.parse(resultado))
-    })
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      AsyncStorage.getItem('cursos').then(resultado => {
+        resultado = JSON.parse(resultado) || []
+        setCursos(resultado)
+      })
+    }, [])
+  );
 
   return (
     <>
-      <Button style={{ marginTop: 10, margin: 10 }} mode='contained' onPress={() => navigation.push('Form cursos')}>Ir para formulário</Button>
-      {cursos.map(item => (
-        <>
-          <Card style={{margin:5}}>
+      <ScrollView style={{padding:10}}>
+        {cursos.map((item) => (
+          <Card mode='outlined' style={{marginBottom:20}}>
+            <Card.Content>
+              <Text variant="titleLarge">{item.nome}</Text>
+              <Text variant="bodyMedium">Duração: {item.duracao}</Text>
+              <Text variant="bodyMedium">Modalidade: {item.modalidade}</Text>
+            </Card.Content>
             <Card.Actions>
-            <Text style={{margin:10}}>{item.nome}</Text>
-            <MaterialCommunityIcons name="trash-can" size={20} />
-            <MaterialCommunityIcons name="comment-edit" size={20} />
+              <IconButton icon="delete" />
+              <IconButton icon="pencil" />
             </Card.Actions>
           </Card>
-        </>
-      ))}
+        ))}
+      </ScrollView>
+      <FAB 
+        icon="plus"
+        size='small'
+        style={{position:'absolute', right: 5, bottom: 5  }}
+        onPress={() => navigation.push('Form cursos')}
+      />
     </>
   )
 }
