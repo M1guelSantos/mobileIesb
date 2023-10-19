@@ -33,8 +33,8 @@ const Personagens = ({navigation}) => {
               margin: 10
             }}
               title={item.nome}
-              subtitle={item.ator}
-              left={(props) => <Avatar.Image size={50} source={{ uri: item.urlImagem }} />}
+              subtitle={item.siglaUf}
+              left={(props) => <Avatar.Image size={50} source={{ uri: item.urlFoto }} />}
               right={(props) => <IconButton {...props} icon="chevron-right-circle-outline" onPress={() => navigation.push('Personagens-detalhes', { id: item.id })} />}
             />
           </Card>

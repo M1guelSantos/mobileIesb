@@ -27,7 +27,7 @@ o .Map possui a seguinte estrutura
                 
 Concatenando no Js array -> {carro.marca} - {carro.ano}
 ---------------------------------------------------------------------
-Secure: "https://image.tmdb.org/t/p/w500"
+Secure: "https://image.tmdb.org/t/p/w500" -> Para imagens
 
 baseURL: https://api.themoviedb.org/3/
 ---------------------------------------------------------------------
@@ -43,3 +43,36 @@ const apiFilmes = axios.create({
 })
 ----------------------------------------------------------------------------|
 Exibindo chamada API barra de pesquisa browser : https://api.themoviedb.org/3/movie/popular?api_key=3e7a8f80f3de0521383e078234f63a5a
+						language=pt-BR&api_key -> Para transformar json em portugues
+------------------------------------------------------------------------------------
+Sempre usar useState e useEffect
+
+useEffect(()=>{
+
+  }, []),
+
+
+const [FilmesPopulares, setFilmesPopulares] = useState([])
+
+//Navegar entre as páginas
+1- Colocar o navigation
+const FilmesPopulares = ({ navigation }) => {
+
+2- Chamar o navigation.push
+onPress={() => navigation.push('filmes-detalhes', {id: item.id})} REDIRECIONAS DOS CRIAS SEMPRE FAZER PARA NAVEGAR ENTRE PGS obs: o nome que vai dentro do push deve ser o msm name do app.js
+
+ROUTE.PARAMS -> Fixo para recuperação
+------------------------------------------------------------------------
+`/movie/${id}?language=pt-BR` -> usando a variavel
+-------------------------------------------------------------------------
+sempre que criar uma nova page lançar ela no NAVIGATION
+
+---------------------------------------------------------------------
+ASYNC STORAGE : npm install @react-native-async-storage/async-storage
+
+-----------------------------------------------------------------------------
+ useFocusEffect(
+    React.useCallback(() => {
+      
+    }, [])
+  );
