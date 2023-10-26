@@ -1,16 +1,26 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, Text } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
-const AlunosForm = () => {
-  const [dados, setDados] = useState({})
+const AlunosForm = ({navigation, route}) => {
 
-  function handleChange(valor, campo) {
-    setDados({ ...dados, [campo]: valor })
+  const alunos = route.params?.alunos || {}
+  const id = route.params?.id
+
+  function salvar(dados) {
+    AsyncStorage.getItem('alunos').then(resultado => {
+      const alunos = JSON.parse(resultado) || []
+      if (id >= 0) {
+        alunos.splice(id, 1, dados)
+      } else {
+        alunos.push(dados)
+      }
+      AsyncStorage.setItem('alunos', JSON.stringify(alunos))
+      navigation.goBack()
+    })
   }
-
-  function salvar() {
-    console.log(dados)
   }
   return (
     <>
@@ -21,15 +31,21 @@ const AlunosForm = () => {
           margin: 10,
           color: 'red',
           fontWeight: 'bolder',
-        }}> Formulário de curso </Text>
+        }}> Formulário de alunos </Text>
+         <Formik
+          initialValues={alunos}
+          onSubmit={values => salvar(values)}
+        >
+           {({ values, handleChange, handleSubmit }) => (
+            <View>
         <TextInput style={{
           marginTop: 10,
           margin: 10
         }}
           label="Nome"
           mode='outlined'
-          value={dados.nome}
-          onChangeText={(valor) => handleChange(valor, 'nome')}
+          value={values.nome}
+          onChangeText={handleChange('nome')}
         />
 
         <TextInput style={{
@@ -39,8 +55,8 @@ const AlunosForm = () => {
           label="Cpf"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.cpf}
-          onChangeText={(valor) => handleChange(valor, 'cpf')} />
+          value={values.cpf}
+          onChangeText={handleChange('cpf')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -48,8 +64,8 @@ const AlunosForm = () => {
         }}
           label="matricula"
           mode='outlined'
-          value={dados.matriculo}
-          onChangeText={(valor) => handleChange(valor, 'matricula')} />
+          value={values.matricula}
+          onChangeText={handleChange('matricula')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -58,8 +74,8 @@ const AlunosForm = () => {
           label="email"
           keyboardType='email-address'
           mode='outlined'
-          value={dados.email}
-          onChangeText={(valor) => handleChange(valor, 'email')} />
+          value={values.email}
+          onChangeText={handleChange('email')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -68,8 +84,8 @@ const AlunosForm = () => {
           label="telefone"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.telefone}
-          onChangeText={(valor) => handleChange(valor, 'telefone')} />
+          value={values.telefone}
+          onChangeText={handleChange('telefone')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -78,8 +94,8 @@ const AlunosForm = () => {
           label="cep"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.cep}
-          onChangeText={(valor) => handleChange(valor, 'cep')} />
+          value={values.cep}
+          onChangeText={handleChange('cep')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -88,8 +104,8 @@ const AlunosForm = () => {
           label="logradouro"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.logradouro}
-          onChangeText={(valor) => handleChange(valor, 'logradouro')} />
+          value={values.logradouro}
+          onChangeText={handleChange('logradouro')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -98,8 +114,8 @@ const AlunosForm = () => {
           label="complemento"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.complemento}
-          onChangeText={(valor) => handleChange(valor, 'complemento')} />
+          value={values.complemento}
+          onChangeText={handleChange('complemento')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -108,8 +124,8 @@ const AlunosForm = () => {
           label="numero"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.numero}
-          onChangeText={(valor) => handleChange(valor, 'numero')} />
+          value={values.numero}
+          onChangeText={handleChange('numero')} />
 
         <TextInput style={{
           marginTop: 10,
@@ -118,14 +134,15 @@ const AlunosForm = () => {
           label="bairro"
           keyboardType='decimal-pad'
           mode='outlined'
-          value={dados.bairro}
-          onChangeText={(valor) => handleChange(valor, 'bairro')} />
-
-        <Button style={{marginTop: 10, margin: 5}} mode="contained" onPress={salvar}>Salvar</Button>
+          value={values.bairro}
+          onChangeText={handleChange('bairro')} />
+        <Button mode="contained" style={{ marginTop: 10, margin: 5 }} onPress={handleSubmit}>Salvar</Button>
+        </View>
+      )}
+        </Formik>
       </ScrollView>
-
     </>
   )
-}
+
 
 export default AlunosForm

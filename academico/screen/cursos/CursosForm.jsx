@@ -3,19 +3,29 @@ import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-
+import cursoValidator from '../../validators/cursoValidator';
+import {mask} from 'remask'
 
 const CursosForm = ({ navigation, route }) => {
 
-  const curso = route.params?.curso || {}
+  let curso = {
+    nome: '',
+    duracao: '',
+    modalidade: '',
+  }
+
   const id = route.params?.id
 
- // const [dados, setDados] = useState(curso)
+  if (id >= 0) {
+    curso = route.params?.curso
+  }
 
- /* function handleChange(valor, campo) {
-    setDados({ ...dados, [campo]: valor })
-  }*/
+
+  // const [dados, setDados] = useState(curso)
+
+  /* function handleChange(valor, campo) {
+     setDados({ ...dados, [campo]: valor })
+   }*/
 
   function salvar(dados) {
     AsyncStorage.getItem('cursos').then(resultado => {
@@ -30,15 +40,6 @@ const CursosForm = ({ navigation, route }) => {
     })
 
   }
-  const cursoValidator = Yup.object().shape({
-    nome: Yup.string()
-    .nonNullable()
-    .min(5, 'Valor muito curto')
-    .max(10, 'Valor muito grande')
-    .required('Campo Obrigatório'),
-    duracao:  Yup.number().min(1,'Valor muito pequeno'),
-    modalidade: Yup.string()
-  })
   return (
     <>
       <ScrollView style={{
@@ -51,11 +52,22 @@ const CursosForm = ({ navigation, route }) => {
         }}> Formulário de curso </Text>
         <Formik
           initialValues={curso}
-          validationSchema = {cursoValidator}
+          validationSchema={cursoValidator}
           onSubmit={values => salvar(values)}
         >
-          {( {values, handleChange, handleSubmit, errors, touched} ) => (
-             <View>
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
+            <View>
+
+              <TextInput style={{
+                marginTop: 10,
+                margin: 10
+              }}
+                label="CPF"
+                mode='outlined'
+                value={values.cpf}
+                onChangeText={(value) => {setFieldValue('cpf', mask (value, '999.999.999-99'))}}
+              />
+
               <TextInput style={{
                 marginTop: 10,
                 margin: 10
@@ -65,10 +77,10 @@ const CursosForm = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
-               {(errors.nome && touched.nome) && 
-                 <Text style={{color: 'red'}}>{errors.nome}</Text>
-                 }
-                 
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red' }}>{errors.nome}</Text>
+              }
+
               <TextInput style={{
                 marginTop: 10,
                 margin: 10
@@ -77,11 +89,11 @@ const CursosForm = ({ navigation, route }) => {
                 keyboardType='decimal-pad'
                 mode='outlined'
                 value={values.duracao}
-                onChangeText={handleChange('duracao')} 
-                />
-                 {(errors.duracao && touched.duracao) && 
-                 <Text style={{color: 'red'}}>{errors.duracao}</Text>
-                 }
+                onChangeText={handleChange('duracao')}
+              />
+              {(errors.duracao && touched.duracao) &&
+                <Text style={{ color: 'red' }}>{errors.duracao}</Text>
+              }
 
               <TextInput style={{
                 marginTop: 10,
@@ -90,11 +102,11 @@ const CursosForm = ({ navigation, route }) => {
                 label="Modalidade"
                 mode='outlined'
                 value={values.modalidade}
-                onChangeText={handleChange('modalidade')} 
-                />
-                  {(errors.modalidade && touched.modalidade) && 
-                 <Text style={{color: 'red'}}>{errors.modalidade}</Text>
-                 }
+                onChangeText={handleChange('modalidade')}
+              />
+              {(errors.modalidade && touched.modalidade) &&
+                <Text style={{ color: 'red' }}>{errors.modalidade}</Text>
+              }
               <Button mode="contained" style={{ marginTop: 10, margin: 5 }} onPress={handleSubmit}>Salvar</Button>
             </View>
           )}
