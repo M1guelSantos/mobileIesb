@@ -1,141 +1,165 @@
-import React, { useState } from 'react'
-import { ScrollView, Text } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Formik } from 'formik'
+import { ScrollView, Text, View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
-const AlunosForm = () => {
-  const [dados, setDados] = useState({})
+const ProfessoresForm = ({navigation, route}) => {
+  const professores = route.params?.professores || {}
+  const id = route.params?.id
 
-  function handleChange(valor, campo) {
-    setDados({ ...dados, [campo]: valor })
+  function salvar(dados) {
+    AsyncStorage.getItem('professores').then(resultado => {
+      const professores = JSON.parse(resultado) || []
+      if (id >= 0) {
+        professores.splice(id, 1, dados)
+      } else {
+        professores.push(dados)
+      }
+      AsyncStorage.setItem('professores', JSON.stringify(professores))
+      navigation.goBack()
+    })
+  }
+    return (
+      <>
+        <ScrollView style={{
+          marginTop: 10
+        }}>
+          <Text style={{
+            margin: 10,
+            color: 'red',
+            fontWeight: 'bolder',
+          }}> Formulário de Professores </Text>
+          <Formik
+            initialValues={professores}
+            onSubmit={values => salvar(values)}
+          >
+            {({ values, handleChange, handleSubmit }) => (
+              <View>
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="Nome"
+                  mode='outlined'
+                  value={values.nome}
+                  onChangeText={handleChange('nome')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="cpf"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.cpf}
+                  onChangeText={handleChange('cpf')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="matricula"
+                  mode='outlined'
+                  value={values.matricula}
+                  onChangeText={handleChange('matricula')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="salario"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.salario}
+                  onChangeText={handleChange('salario')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="email"
+                  keyboardType='email-address'
+                  mode='outlined'
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="telefone"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.telefone}
+                  onChangeText={handleChange('telefone')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="cep"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.cep}
+                  onChangeText={handleChange('cep')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="logradouro"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.logradouro}
+                  onChangeText={handleChange('logradouro')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="complemento"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.complemento}
+                  onChangeText={handleChange('complemento')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="numero"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.numero}
+                  onChangeText={handleChange('numero')}
+                />
+
+                <TextInput style={{
+                  marginTop: 10,
+                  margin: 10
+                }}
+                  label="bairro"
+                  keyboardType='decimal-pad'
+                  mode='outlined'
+                  value={values.bairro}
+                  onChangeText={handleChange('bairro')}
+                />
+                <Button mode="contained" style={{ marginTop: 10, margin: 5 }} onPress={handleSubmit}>Salvar</Button>
+              </View>
+            )}
+          </Formik>
+        </ScrollView>
+      </>
+    )
   }
 
-  function salvar() {
-    console.log(dados)
-  }
-  return (
-    <>
-      <ScrollView style={{
-        marginTop: 10
-      }}>
-        <Text style={{
-          margin: 10,
-          color: 'red',
-          fontWeight: 'bolder',
-        }}> Formulário de Professores </Text>
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="Nome"
-          mode='outlined'
-          value={dados.nome}
-          onChangeText={(valor) => handleChange(valor, 'nome')}
-        />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="cpf"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.cpf}
-          onChangeText={(valor) => handleChange(valor, 'cpf')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="matricula"
-          mode='outlined'
-          value={dados.matricula}
-          onChangeText={(valor) => handleChange(valor, 'matricula')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="salario"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.salario}
-          onChangeText={(valor) => handleChange(valor, 'salario')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="email"
-          keyboardType='email-address'
-          mode='outlined'
-          value={dados.email}
-          onChangeText={(valor) => handleChange(valor, 'email')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="telefone"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.telefone}
-          onChangeText={(valor) => handleChange(valor, 'telefone')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="cep"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.cep}
-          onChangeText={(valor) => handleChange(valor, 'cep')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="logradouro"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.logradouro}
-          onChangeText={(valor) => handleChange(valor, 'logradouro')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="complemento"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.complemento}
-          onChangeText={(valor) => handleChange(valor, 'complemento')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="numero"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.numero}
-          onChangeText={(valor) => handleChange(valor, 'numero')} />
-
-        <TextInput style={{
-          marginTop: 10,
-          margin: 10
-        }}
-          label="bairro"
-          keyboardType='decimal-pad'
-          mode='outlined'
-          value={dados.bairro}
-          onChangeText={(valor) => handleChange(valor, 'bairro')} />
-
-        <Button style={{ marginTop: 10, margin: 5 }} mode="contained" onPress={salvar}>Salvar</Button>
-      </ScrollView>
-
-    </>
-  )
-}
-
-export default AlunosForm
+  export default ProfessoresForm

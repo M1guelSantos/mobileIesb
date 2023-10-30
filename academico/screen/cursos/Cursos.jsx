@@ -66,8 +66,8 @@ const Cursos = ({ navigation }) => {
               <Text variant="bodyMedium">Deseja realmente excluir?</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={excluir}>Done</Button>
-              <Button onPress={hideDialog}>Cancel</Button>
+              <Button onPress={excluir}>Excluir</Button>
+              <Button onPress={hideDialog}>Cancelar</Button>
             </Dialog.Actions>
           </Dialog>
         </Portal>

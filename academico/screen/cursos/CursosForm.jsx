@@ -57,17 +57,6 @@ const CursosForm = ({ navigation, route }) => {
         >
           {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
             <View>
-
-              <TextInput style={{
-                marginTop: 10,
-                margin: 10
-              }}
-                label="CPF"
-                mode='outlined'
-                value={values.cpf}
-                onChangeText={(value) => {setFieldValue('cpf', mask (value, '999.999.999-99'))}}
-              />
-
               <TextInput style={{
                 marginTop: 10,
                 margin: 10

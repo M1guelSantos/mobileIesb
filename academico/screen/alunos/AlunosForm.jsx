@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from 'formik'
-import React, { useState } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
 const AlunosForm = ({navigation, route}) => {
@@ -20,7 +19,7 @@ const AlunosForm = ({navigation, route}) => {
       AsyncStorage.setItem('alunos', JSON.stringify(alunos))
       navigation.goBack()
     })
-  }
+
   }
   return (
     <>
@@ -143,6 +142,5 @@ const AlunosForm = ({navigation, route}) => {
       </ScrollView>
     </>
   )
-
-
+  }
 export default AlunosForm

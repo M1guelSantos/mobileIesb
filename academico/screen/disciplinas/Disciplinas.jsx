@@ -44,7 +44,7 @@ const Disciplinas = ({ navigation }) => {
         {disciplinas.map((item, i) => (
           <Card key={i} mode='outlined' style={{ marginBottom: 20 }}>
             <Card.Content>
-              <Text variant="titleLarge">Nome: {item.nome}</Text>
+              <Text variant="titleLarge">Disciplina: {item.nome}</Text>
               <Text variant="bodyMedium">Curso: {item.curso}</Text>
             </Card.Content>
             <Card.Actions>
@@ -65,8 +65,8 @@ const Disciplinas = ({ navigation }) => {
               <Text variant="bodyMedium">Deseja realmente excluir?</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={excluir}>Done</Button>
-              <Button onPress={hideDialog}>Cancel</Button>
+              <Button onPress={excluir}>Excluir</Button>
+              <Button onPress={hideDialog}>Cancelar</Button>
             </Dialog.Actions>
           </Dialog>
         </Portal>
