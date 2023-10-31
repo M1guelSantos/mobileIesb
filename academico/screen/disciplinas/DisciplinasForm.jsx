@@ -1,18 +1,31 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Picker } from '@react-native-picker/picker'
 import { Formik } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const DisciplinasForm = ({navigation, route}) => {
 
-  const disciplinas = route.params?.disciplinas || {}
+const DisciplinasForm = ({ navigation, route }) => {
+
+  let disciplinas = {
+    nome: '',
+    curso_id: ''
+  }
+
+  const [cursos, setCursos] = useState([])
   const id = route.params?.id
- // const [dados, setDados] = useState({})
 
- /* function handleChange(valor, campo) {
-    setDados({ ...dados, [campo]: valor })
-  } */
+  if (id >= 0) {
+    disciplinas = route.params?.disciplinas
+  }
+
+  useEffect(() => {
+    AsyncStorage.getItem('cursos').then(resultado => {
+      resultado = JSON.parse(resultado) || []
+      setCursos(resultado)
+    })
+  }, [])
 
   function salvar(dados) {
     AsyncStorage.getItem('disciplinas').then(resultado => {
@@ -26,7 +39,7 @@ const DisciplinasForm = ({navigation, route}) => {
       navigation.goBack()
     })
   }
-  
+
   return (
     <>
       <ScrollView style={{
@@ -53,15 +66,17 @@ const DisciplinasForm = ({navigation, route}) => {
                 onChangeText={handleChange('nome')}
               />
 
-              <TextInput style={{
-                marginTop: 10,
-                margin: 10
-              }}
-                label="Curso"
-                keyboardType='decimal-pad'
-                mode='outlined'
-                value={values.curso}
-                onChangeText={handleChange('curso')} />
+              <Picker
+                selectedValue={values.curso_id}
+                onValueChange={handleChange('curso_id')}>
+                <Picker.Item label="Curso" value="" />
+                {cursos.map ((item, i) =>(
+                  <Picker.Item key={i}
+                  label={item.nome} 
+                  value={item.nome}
+                  />
+                ))}
+              </Picker>
               <Button mode="contained" style={{ marginTop: 10, margin: 5 }} onPress={handleSubmit}>Salvar</Button>
             </View>
           )}

@@ -76,3 +76,8 @@ ASYNC STORAGE : npm install @react-native-async-storage/async-storage
       
     }, [])
   );
+
+  npm i formik
+  npm i yup
+  import * as Yup from 'yup';
+  npm i remask
