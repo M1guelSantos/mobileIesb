@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import disciplinaValidator from '../../validators/disciplinaValidator';
 
 
 const DisciplinasForm = ({ navigation, route }) => {
@@ -52,9 +53,10 @@ const DisciplinasForm = ({ navigation, route }) => {
         }}> Formulário de disciplinas</Text>
         <Formik
           initialValues={disciplinas}
+          validationSchema={disciplinaValidator}
           onSubmit={values => salvar(values)}
         >
-          {({ values, handleChange, handleSubmit }) => (
+          {({ values, handleChange, handleSubmit, errors, touched }) => (
             <View>
               <TextInput style={{
                 marginTop: 10,
@@ -65,15 +67,18 @@ const DisciplinasForm = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red' }}>{errors.nome}</Text>
+              }
 
               <Picker
                 selectedValue={values.curso_id}
                 onValueChange={handleChange('curso_id')}>
                 <Picker.Item label="Curso" value="" />
-                {cursos.map ((item, i) =>(
+                {cursos.map((item, i) => (
                   <Picker.Item key={i}
-                  label={item.nome} 
-                  value={item.nome}
+                    label={item.nome}
+                    value={item.nome}
                   />
                 ))}
               </Picker>

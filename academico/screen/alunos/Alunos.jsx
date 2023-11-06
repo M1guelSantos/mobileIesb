@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useFocusEffect } from '@react-navigation/native'
 import React, { useState } from 'react'
+import { ScrollView } from 'react-native'
 import { Button, Card, Dialog, FAB, IconButton, Portal, Text } from 'react-native-paper'
-import { ScrollView } from 'react-native-web'
+
 
 const Alunos = ({ navigation }) => {
   const [alunos, setAlunos] = useState([])
